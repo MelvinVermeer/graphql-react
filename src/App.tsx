@@ -1,24 +1,26 @@
 import { gql, useQuery } from "@apollo/client";
 import "./App.css";
 import ProductCard from "./ProductCard";
+import { Product } from "./__generated__/gateway";
 
 const GET_PRODUCT = gql`
   query product($productId: String!) {
     product(id: $productId) {
       id
       name
-      price
+      price # comment this field to show the issue
     }
   }
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(GET_PRODUCT, {
+  const { loading, error, data } = useQuery<{ product: Product }>(GET_PRODUCT, {
     variables: { productId: "25" },
   });
 
   if (loading) return <p>Loading ⏳</p>;
   if (error) return <p>Error 😢</p>;
+  if (!data) return <p>No data 😢</p>;
 
   return (
     <div style={{ marginLeft: "20px" }}>
