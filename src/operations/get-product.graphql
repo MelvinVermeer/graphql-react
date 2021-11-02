@@ -1,0 +1,7 @@
+query product($productId: String!) {
+  product(id: $productId) {
+    id
+    name
+    price # comment this field to show the issue
+  }
+}

@@ -1,21 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
 import "./App.css";
 import ProductCard from "./ProductCard";
-import { Product } from "./__generated__/gateway";
-
-const GET_PRODUCT = gql`
-  query product($productId: String!) {
-    product(id: $productId) {
-      id
-      name
-      price # comment this field to show the issue
-    }
-  }
-`;
+import { useProductQuery } from "./__generated__/gateway";
 
 function App() {
-  const { loading, error, data } = useQuery<{ product: Product }>(GET_PRODUCT, {
-    variables: { productId: "25" },
+  const { loading, error, data } = useProductQuery({
+    variables: { productId: "25" }, // Try to make a typo now
   });
 
   if (loading) return <p>Loading ⏳</p>;
@@ -27,7 +16,6 @@ function App() {
       <h4>Returned json object</h4>
       <pre>{JSON.stringify(data.product, null, 2)}</pre>
 
-      {/* Let's use this data in our component */}
       <ProductCard name={data.product.name} price={data.product.price} />
     </div>
   );
