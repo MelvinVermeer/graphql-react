@@ -1,0 +1,6 @@
+overwrite: true
+schema: http://localhost:3000/
+generates:
+  src/__generated__/gateway.ts:
+    plugins:
+      - typescript
