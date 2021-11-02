@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import "./App.css";
+import ProductCard from "./ProductCard";
 
 const GET_PRODUCT = gql`
   query product($productId: String!) {
@@ -23,6 +24,9 @@ function App() {
     <div style={{ marginLeft: "20px" }}>
       <h4>Returned json object</h4>
       <pre>{JSON.stringify(data.product, null, 2)}</pre>
+
+      {/* Let's use this data in our component */}
+      <ProductCard name={data.product.name} price={data.product.price} />
     </div>
   );
 }
