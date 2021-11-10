@@ -2,7 +2,7 @@ import "./App.css";
 import ProductCard from "./ProductCard";
 import { useProductQuery } from "./__generated__/gateway";
 
-function App() {
+export default function App() {
   const { loading, error, data } = useProductQuery({
     variables: { productId: "25" }, // Try to make a typo now
   });
@@ -20,5 +20,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
