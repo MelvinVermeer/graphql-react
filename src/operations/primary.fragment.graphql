@@ -1,0 +1,6 @@
+fragment PrimaryFields on Primary {
+  __typename
+  id
+  name
+  isoType
+}

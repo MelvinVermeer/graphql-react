@@ -1,22 +1,15 @@
 import "./App.css";
-import ProductCard from "./ProductCard";
+import { Overview } from "./Overview";
 import { useProductQuery } from "./__generated__/gateway";
 
 export default function App() {
   const { loading, error, data } = useProductQuery({
-    variables: { productId: "25" }, // Try to make a typo now
+    variables: { productId: "125" }, // Try switching above and below 100
   });
 
   if (loading) return <p>Loading ⏳</p>;
   if (error) return <p>Error 😢</p>;
   if (!data) return <p>No data 😢</p>;
 
-  return (
-    <div style={{ marginLeft: "20px" }}>
-      <h4>Returned json object</h4>
-      <pre>{JSON.stringify(data.product, null, 2)}</pre>
-
-      <ProductCard name={data.product.name} price={data.product.price} />
-    </div>
-  );
+  return <Overview {...data.product} />;
 }

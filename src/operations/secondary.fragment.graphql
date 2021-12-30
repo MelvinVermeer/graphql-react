@@ -1,0 +1,6 @@
+fragment SecondaryFields on Secondary {
+  __typename
+  id
+  name
+  description
+}
