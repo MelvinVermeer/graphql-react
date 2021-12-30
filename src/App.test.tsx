@@ -24,14 +24,15 @@ const mocks: Mock[] = [
     request: {
       query: ProductDocument,
       variables: {
-        productId: "25",
+        productId: "125",
       },
     },
     result: {
       data: {
         product: {
-          id: "25",
-          price: 1999,
+          __typename: "Primary",
+          isoType: "iso45",
+          id: "125",
           name: "Car",
         },
       },
@@ -50,7 +51,7 @@ it("renders loading", () => {
   expect(content.children.join("")).toContain("Loading ⏳");
 });
 
-it("renders product", async () => {
+it("renders primary product", async () => {
   const component = TestRenderer.create(
     <MockedProvider mocks={mocks}>
       <App />
@@ -59,6 +60,6 @@ it("renders product", async () => {
 
   await act(wait);
 
-  const content = component.root.findByType("h2");
-  expect(content.children.join("")).toContain("Car for $19.99");
+  const content = component.root.findByType("h3");
+  expect(content.children.join("")).toContain("Car Iso type: iso45");
 });
